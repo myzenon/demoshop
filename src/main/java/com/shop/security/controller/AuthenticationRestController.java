@@ -4,8 +4,6 @@ import com.shop.config.json.View;
 import com.shop.entity.User;
 import com.shop.security.JwtAuthenticationRequest;
 import com.shop.security.JwtTokenUtil;
-import com.shop.security.JwtUser;
-import com.shop.security.service.JwtAuthenticationResponse;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import com.shop.service.UserService;
@@ -21,7 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +41,7 @@ public class AuthenticationRestController {
     @Autowired
     private UserService userService;
 
-//    @JsonView(View.Auth.class)
+    @JsonView(View.Auth.class)
     @PostMapping("${jwt.route.authentication.path}")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
 

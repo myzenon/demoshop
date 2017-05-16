@@ -22,12 +22,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @JsonView(View.Auth.class)
     @NonNull
     String username;
 
     @NonNull
     String password;
 
+    @JsonView(View.Auth.class)
     @ManyToMany
     List<Authority> authorities;
 

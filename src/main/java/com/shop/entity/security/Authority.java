@@ -1,6 +1,8 @@
 package com.shop.entity.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.shop.config.json.View;
 import lombok.*;
 import javax.persistence.*;
 
@@ -16,6 +18,7 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @JsonView(View.Auth.class)
     @NonNull
     AuthorityName name;
 
