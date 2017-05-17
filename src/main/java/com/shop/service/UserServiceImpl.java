@@ -6,6 +6,7 @@ import com.shop.entity.security.Authority;
 import com.shop.entity.security.AuthorityName;
 import com.shop.security.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
     AuthorityRepository authorityRepository;
 
     public User addUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return this.userDao.addUser(user);
     }
 
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
         List<Authority> authorities = new ArrayList<>();
         authorities.add(authorityRepository.findByName(AuthorityName.ROLE_CUSTOMER));
         user.setAuthorities(authorities);
-        return this.userDao.addUser(user);
+        return this.addUser(user);
     }
 
     public User findByUsername(String username) {
